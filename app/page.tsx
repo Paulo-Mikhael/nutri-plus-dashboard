@@ -1,13 +1,9 @@
-import Logo from "@/components/Logo";
-import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <div className="flex h-screen justify-center items-center bg-slate-400 gap-10">
-      <Button variant="outline">
-        Botão Shadcn
-      </Button>
-      <Logo />
+    <div className="flex flex-col h-screen bg-slate-300 dark:bg-slate-900 p-4">
+      <Header />
     </div>
   );
 }
