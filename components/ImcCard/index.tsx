@@ -22,8 +22,8 @@ export function ImcCard() {
             <Input id="user-height" placeholder="Insira sua altura" />
           </div>
           <div>
-            <label htmlFor="user-height">Peso:</label>
-            <Input id="user-height" placeholder="Insira seu peso" />
+            <label htmlFor="user-weight">Peso:</label>
+            <Input id="user-weight" placeholder="Insira seu peso" />
           </div>
         </div>
       </div>
