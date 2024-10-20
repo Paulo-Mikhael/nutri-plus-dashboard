@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  n: null; // Para evitar o erro de build => @typescript-eslint/no-empty-object-type
+  n?: null; // Para evitar o erro de build => @typescript-eslint/no-empty-object-type
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(

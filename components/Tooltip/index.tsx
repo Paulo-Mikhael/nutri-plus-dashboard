@@ -6,14 +6,16 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
-export default function Tooltip({
+export function Tooltip({
   children,
   tipText,
 }: { children: ReactNode; tipText: string }) {
   return (
     <TooltipProvider>
       <TooltipContainer>
-        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        <TooltipTrigger asChild>
+          <span className="cursor-pointer">{children}</span>
+        </TooltipTrigger>
         <TooltipContent>
           <div className="sr-only">{tipText}</div>
           {tipText}
