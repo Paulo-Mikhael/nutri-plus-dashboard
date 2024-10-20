@@ -10,8 +10,8 @@ import { ThemeButton } from "../ThemeButton";
 export default function Header() {
   return (
     <header className="w-full">
-      <Card className="h-16 flex items-center justify-between pr-6">
-        <div className="h-full w-16 bg-slate-400 dark:bg-slate-800 cursor-pointer flex items-center justify-center rounded-lg">
+      <Card className="h-16 flex items-center justify-between pr-6 rounded-l-none">
+        <div className="h-full w-16 bg-slate-400 dark:bg-slate-800 cursor-pointer flex items-center justify-center rounded-none">
           <Logo size={36} />
         </div>
         <div className="flex items-center gap-2">
@@ -21,7 +21,7 @@ export default function Header() {
               <Bell className="h-[1.2rem] w-[1.2rem] cursor-pointer text-slate-800 dark:text-slate-100" />
             </Button>
           </Tooltip>
-          <Tooltip tipText="Meu perfil">
+          <Tooltip tipText="Ver Perfil">
             <Button variant="ghost" size="icon">
               <Image className="size-8" src={user} alt="imagem do usuário" />
             </Button>
