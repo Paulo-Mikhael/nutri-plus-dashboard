@@ -1,7 +1,7 @@
 import { CardTitle } from "../CardTitle";
 import { Tooltip } from "../Tooltip";
 import { Card } from "../ui/card";
-import { Input } from "../ui/input";
+import { ImcForm } from "./ImcForm";
 
 export function ImcCard() {
   return (
@@ -16,16 +16,7 @@ export function ImcCard() {
             <h4 className="text-3xl">19</h4>
           </Card>
         </Tooltip>
-        <div className="flex gap-2">
-          <div>
-            <label htmlFor="user-height">Altura:</label>
-            <Input id="user-height" placeholder="Insira sua altura" />
-          </div>
-          <div>
-            <label htmlFor="user-weight">Peso:</label>
-            <Input id="user-weight" placeholder="Insira seu peso" />
-          </div>
-        </div>
+        <ImcForm />
       </div>
     </article>
   );
