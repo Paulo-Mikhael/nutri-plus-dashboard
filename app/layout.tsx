@@ -16,7 +16,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Nutri+ - Sua saúde em dia",
-  description: "Dashboard que notifica o usuário sobre sua nutrição, mostrando dados baseados nas  informações obtidads pelo usuário",
+  description:
+    "Dashboard que notifica o usuário sobre sua nutrição, mostrando dados baseados nas  informações obtidads pelo usuário",
 };
 
 export default function RootLayout({
@@ -29,12 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="light">
           {children}
         </ThemeProvider>
       </body>
