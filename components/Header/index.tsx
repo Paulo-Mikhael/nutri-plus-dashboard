@@ -6,6 +6,7 @@ import Logo from "../Logo";
 import { Button } from "../ui/button";
 import { Tooltip } from "../Tooltip";
 import { ThemeButton } from "../ThemeButton";
+import { SelectUserActivity } from "./SelectUserActivity";
 
 export function Header() {
   return (
@@ -21,6 +22,9 @@ export function Header() {
               <Bell className="h-[1.2rem] w-[1.2rem] cursor-pointer text-slate-800 dark:text-slate-100" />
             </Button>
           </Tooltip>
+          <span>
+            <SelectUserActivity />
+          </span>
           <Tooltip tipText="Ver Perfil">
             <Button variant="ghost" size="icon">
               <Image className="size-8" src={user} alt="imagem do usuário" />

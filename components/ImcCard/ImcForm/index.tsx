@@ -5,9 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { InputForm } from "./InputForm";
 import { Button } from "@/components/ui/button";
-import { Tooltip } from "@/components/Tooltip";
-import { Card } from "@/components/ui/card";
 import { useState } from "react";
+import { SquareInfoCard } from "@/components/SquareInfoCard";
 
 const formSchema = z.object({
   height: z.string().min(1),
@@ -73,12 +72,11 @@ export function ImcForm() {
 
   return (
     <div className="flex gap-4">
-      <Tooltip tipText="IMC atual com base no seu peso e altura">
-        <Card className="p-5 flex flex-col gap-2 justify-center items-center h-full">
-          <h4 className="text-3xl">{userImc.toFixed(2)}</h4>
-          <h5 className="text-center">{userImcStatus}</h5>
-        </Card>
-      </Tooltip>
+      <SquareInfoCard
+        tipText="Seu IMC atual, calculado dividindo o seu peso pela a sua altura ao quadrado (p / a^2)"
+        h4={userImc.toFixed(2)}
+        h5={userImcStatus}
+      />
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-2">
         <div className="flex gap-2">
           <InputForm placeholder="Insira sua altura" label="Altura:" form={form} name="height" />
