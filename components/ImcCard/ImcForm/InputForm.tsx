@@ -1,11 +1,10 @@
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import type { UseFormReturn } from "react-hook-form";
-import type { ImcSchema } from ".";
 
 interface InputFormProps {
-  form: UseFormReturn<ImcSchema>;
-  name: "height" | "weight";
+  form: UseFormReturn<any>;
+  name: string;
   placeholder: string;
   label: string;
 }

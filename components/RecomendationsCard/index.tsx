@@ -1,15 +1,26 @@
+"use client";
+
+import { useUserStore } from "@/hooks/state/store";
 import { CardTitle } from "../CardTitle";
 import { SquareInfoCard } from "../SquareInfoCard";
 
 export function RecomendationsCard() {
+  const userWeight = useUserStore((state) => state.weight);
+  const userWaterRecomendation = (Number(userWeight) * 35) / 1000;
+
   return (
     <article className="h-full w-full flex flex-col gap-3">
       <CardTitle
         h2="Recomendações"
         h3="Porções recomendadas a se consumir diáriamente baseados no seu IMC"
       />
-      <div>
-        <SquareInfoCard h4="2.1" h5="Consumo de água" titleH5 tipText="Consumo de água" />
+      <div className="flex gap-2">
+        <SquareInfoCard
+          h4={`${userWaterRecomendation.toFixed(1)} L`}
+          h5="Consumo de água"
+          titleH5
+          tipText="Consumo de água"
+        />
       </div>
     </article>
   );

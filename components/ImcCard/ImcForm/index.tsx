@@ -5,15 +5,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { InputForm } from "./InputForm";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { SquareInfoCard } from "@/components/SquareInfoCard";
+import type { UserImcStatus } from "@/types/UserImcStatus";
+import { useUserStore } from "@/hooks/state/store";
 
 const formSchema = z.object({
   height: z.string().min(1),
   weight: z.string().min(1),
 });
 export type ImcSchema = z.infer<typeof formSchema>;
-type UserImcStatus = "Indefinido" | "Baixo Peso" | "Normal" | "Sobrepeso" | "Obesidade";
 
 export function ImcForm() {
   const form = useForm<ImcSchema>({
@@ -23,8 +23,12 @@ export function ImcForm() {
       weight: "",
     },
   });
-  const [userImc, setUserImc] = useState<number>(0);
-  const [userImcStatus, setUserImcStatus] = useState<UserImcStatus>("Indefinido");
+  const userImc = useUserStore((state) => state.imc);
+  const setUserImc = useUserStore((state) => state.setUserImc);
+  const userImcStatus = useUserStore((state) => state.status);
+  const setUserImcStatus = useUserStore((state) => state.setUserImcStatus);
+  const setUserWeight = useUserStore((state) => state.setWeight);
+  const setUserHeight = useUserStore((state) => state.setHeight);
 
   function takeUserImcStatus(imc: number): UserImcStatus {
     if (imc < 18.5) {
@@ -45,6 +49,9 @@ export function ImcForm() {
     if (!Number(weight) || !Number(height)) {
       form.setValue("weight", "");
       form.setValue("height", "");
+
+      setUserHeight("0");
+      setUserWeight("0");
       setUserImc(0);
       setUserImcStatus("Indefinido");
       return;
@@ -59,14 +66,19 @@ export function ImcForm() {
     if (numHeight > 3) {
       form.setValue("weight", formatWeight);
       form.setValue("height", "");
+
       setUserImc(0);
       setUserImcStatus("Indefinido");
+
       return;
     }
 
     form.setValue("weight", formatWeight);
     form.setValue("height", formatHeight);
-    setUserImc(userImc);
+
+    setUserHeight(height);
+    setUserWeight(weight);
+    setUserImc(parseFloat(userImc.toFixed(2)));
     setUserImcStatus(takeUserImcStatus(userImc));
   }
 
@@ -74,7 +86,7 @@ export function ImcForm() {
     <div className="flex gap-4">
       <SquareInfoCard
         tipText="Seu IMC atual, calculado dividindo o seu peso pela a sua altura ao quadrado (p / a^2)"
-        h4={userImc.toFixed(2)}
+        h4={String(userImc)}
         h5={userImcStatus}
       />
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-2">
@@ -82,7 +94,7 @@ export function ImcForm() {
           <InputForm placeholder="Insira sua altura" label="Altura:" form={form} name="height" />
           <InputForm placeholder="Insira seu peso" label="Peso:" form={form} name="weight" />
         </div>
-        <Button variant="outline">Enviar</Button>
+        <Button variant="default">Enviar</Button>
       </form>
     </div>
   );
