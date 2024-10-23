@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Header } from "../Header";
 import { Aside } from "../Aside";
+import { Toaster } from "../ui/toaster";
 
 export function PageLayout({ children }: { children: ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export function PageLayout({ children }: { children: ReactNode }) {
         <Aside />
         <main className="h-full flex-grow p-4 overflow-y-scroll">{children}</main>
       </div>
+      <Toaster />
     </div>
   );
 }

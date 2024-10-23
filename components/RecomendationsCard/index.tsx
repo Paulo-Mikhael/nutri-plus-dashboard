@@ -19,7 +19,7 @@ export function RecomendationsCard() {
           h4={`${userWaterRecomendation.toFixed(1)} L`}
           h5="Consumo de água"
           titleH5
-          tipText="Consumo de água"
+          tipText="De acordo com seu peso e nível físico, seu consumo de água diário deve ser esse. ((p * 30) / 1000)"
         />
       </div>
     </article>
