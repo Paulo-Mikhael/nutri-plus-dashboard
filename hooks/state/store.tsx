@@ -15,9 +15,10 @@ type UserActions = {
   setUserImc: (imc: number) => void;
   setUserImcStatus: (status: UserImcStatus) => void;
   setUserLevel: (level: UserLevel) => void;
+  getUserWaterRecommendation: () => number;
 };
 
-export const useUserStore = create<UserState & UserActions>((set) => ({
+export const useUserStore = create<UserState & UserActions>((set, get) => ({
   imc: 0,
   height: "",
   weight: "",
@@ -28,4 +29,22 @@ export const useUserStore = create<UserState & UserActions>((set) => ({
   setUserImc: (imc) => set(() => ({ imc })),
   setUserImcStatus: (status) => set(() => ({ status })),
   setUserLevel: (level) => set(() => ({ level })),
+  getUserWaterRecommendation: () => {
+    const waterPerWeightCalculation = (Number(get().weight) * 35) / 1000;
+    const userLevel = get().level;
+
+    if (!userLevel) return waterPerWeightCalculation;
+
+    if (userLevel === "sedentario") {
+      return waterPerWeightCalculation;
+    } else if (userLevel === "leve") {
+      return waterPerWeightCalculation + 0.4;
+    } else if (userLevel === "moderado") {
+      return waterPerWeightCalculation + 0.8;
+    } else if (userLevel === "forte") {
+      return waterPerWeightCalculation + 1.2;
+    } else {
+      return waterPerWeightCalculation + 1.5;
+    }
+  },
 }));

@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button";
 import { SquareInfoCard } from "@/components/SquareInfoCard";
 import type { UserImcStatus } from "@/types/UserImcStatus";
 import { useUserStore } from "@/hooks/state/store";
-import { useEffect } from "react";
-import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   height: z.string().min(1),
@@ -18,7 +16,6 @@ const formSchema = z.object({
 export type ImcSchema = z.infer<typeof formSchema>;
 
 export function ImcForm() {
-  const { toast } = useToast();
   const form = useForm<ImcSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -84,14 +81,6 @@ export function ImcForm() {
     setUserImc(parseFloat(userImc.toFixed(2)));
     setUserImcStatus(takeUserImcStatus(userImc));
   }
-
-  useEffect(() => {
-    toast({
-      title: "Personalize seu Dashboard!",
-      description:
-        "Começe colocando suas informações de peso e altura para obter o IMC, e não se esqueça de selecionar o seu nível de atividade física também!",
-    });
-  }, []);
 
   return (
     <div className="flex gap-4">
