@@ -7,7 +7,12 @@ import { InputForm } from "./InputForm";
 import { Button } from "@/components/ui/button";
 import { SquareInfoCard } from "@/components/SquareInfoCard";
 import type { UserImcStatus } from "@/types/UserImcStatus";
-import { useUserStore } from "@/hooks/state/store";
+import { useUserImc } from "@/hooks/use-user-imc";
+import { useSetUserImc } from "@/hooks/use-set-user-imc";
+import { useUserStatus } from "@/hooks/use-user-status";
+import { useSetUserImcStatus } from "@/hooks/use-set-user-imc-status";
+import { useSetUserWeight } from "@/hooks/use-set-user-weight";
+import { useSetUserHeight } from "@/hooks/use-set-user-height";
 
 const formSchema = z.object({
   height: z.string().min(1),
@@ -23,12 +28,12 @@ export function ImcForm() {
       weight: "",
     },
   });
-  const userImc = useUserStore((state) => state.imc);
-  const setUserImc = useUserStore((state) => state.setUserImc);
-  const userImcStatus = useUserStore((state) => state.status);
-  const setUserImcStatus = useUserStore((state) => state.setUserImcStatus);
-  const setUserWeight = useUserStore((state) => state.setWeight);
-  const setUserHeight = useUserStore((state) => state.setHeight);
+  const userImc = useUserImc();
+  const setUserImc = useSetUserImc();
+  const userImcStatus = useUserStatus();
+  const setUserImcStatus = useSetUserImcStatus();
+  const setUserWeight = useSetUserWeight();
+  const setUserHeight = useSetUserHeight();
 
   function takeUserImcStatus(imc: number): UserImcStatus {
     if (imc < 18.5) {

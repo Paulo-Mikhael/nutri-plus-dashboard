@@ -1,6 +1,5 @@
 "use client";
 
-import { useUserStore } from "@/hooks/state/store";
 import {
   Select,
   SelectItem,
@@ -15,6 +14,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
+import { useSetUserLevel } from "@/hooks/use-set-user-level";
 
 const userLevelEnum = ["sedentario", "leve", "moderado", "forte", "extremo"] as const;
 const formSchema = z.object({
@@ -23,14 +23,14 @@ const formSchema = z.object({
 type LevelSchema = z.infer<typeof formSchema>;
 
 export function SelectUserActivity() {
+  const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const setUserLevel = useSetUserLevel();
   const form = useForm<LevelSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       level: null,
     },
   });
-  const setUserLevel = useUserStore((state) => state.setUserLevel);
-  const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 
   function onSubmit(data: LevelSchema) {
     setUserLevel(data.level);

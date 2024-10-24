@@ -1,6 +1,7 @@
 import type { UserImcStatus } from "@/types/UserImcStatus";
 import type { UserLevel } from "@/types/UserLevel";
 import { create } from "zustand";
+import { increaseWaterRecommendationByLevel } from "./functions/increaseWaterRecommendationByLevel";
 
 type UserState = {
   imc: number;
@@ -8,6 +9,8 @@ type UserState = {
   weight: string;
   status: UserImcStatus;
   level: UserLevel;
+  idade: number | null;
+  gender: "male" | "woman" | null;
 };
 type UserActions = {
   setHeight: (height: string) => void;
@@ -16,6 +19,7 @@ type UserActions = {
   setUserImcStatus: (status: UserImcStatus) => void;
   setUserLevel: (level: UserLevel) => void;
   getUserWaterRecommendation: () => number;
+  getUserBMR: () => void;
 };
 
 export const useUserStore = create<UserState & UserActions>((set, get) => ({
@@ -24,6 +28,8 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
   weight: "",
   status: "Indefinido",
   level: null,
+  idade: null,
+  gender: null,
   setHeight: (height) => set(() => ({ height })),
   setWeight: (weight) => set(() => ({ weight })),
   setUserImc: (imc) => set(() => ({ imc })),
@@ -35,16 +41,7 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
 
     if (!userLevel) return waterPerWeightCalculation;
 
-    if (userLevel === "sedentario") {
-      return waterPerWeightCalculation;
-    } else if (userLevel === "leve") {
-      return waterPerWeightCalculation + 0.4;
-    } else if (userLevel === "moderado") {
-      return waterPerWeightCalculation + 0.8;
-    } else if (userLevel === "forte") {
-      return waterPerWeightCalculation + 1.2;
-    } else {
-      return waterPerWeightCalculation + 1.5;
-    }
+    return increaseWaterRecommendationByLevel(userLevel, waterPerWeightCalculation);
   },
+  getUserBMR: () => {},
 }));
