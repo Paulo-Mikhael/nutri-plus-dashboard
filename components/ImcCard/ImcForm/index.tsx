@@ -3,7 +3,6 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { InputForm } from "./InputForm";
 import { Button } from "@/components/ui/button";
 import { SquareInfoCard } from "@/components/SquareInfoCard";
 import type { UserImcStatus } from "@/types/UserImcStatus";
@@ -13,12 +12,13 @@ import { useUserStatus } from "@/hooks/use-user-status";
 import { useSetUserImcStatus } from "@/hooks/use-set-user-imc-status";
 import { useSetUserWeight } from "@/hooks/use-set-user-weight";
 import { useSetUserHeight } from "@/hooks/use-set-user-height";
+import { InputForm } from "@/components/InputForm";
 
 const formSchema = z.object({
   height: z.string().min(1),
   weight: z.string().min(1),
 });
-export type ImcSchema = z.infer<typeof formSchema>;
+type ImcSchema = z.infer<typeof formSchema>;
 
 export function ImcForm() {
   const form = useForm<ImcSchema>({

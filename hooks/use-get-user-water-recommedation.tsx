@@ -9,6 +9,6 @@ export function useGetUserWaterRecommendation(): () => number {
     userLevel?.includes("");
     userWeight?.includes("");
 
-    return userWaterRecommendation();
+    return Number(userWaterRecommendation().toFixed(1));
   };
 }

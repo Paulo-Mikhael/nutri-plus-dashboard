@@ -9,8 +9,8 @@ type UserState = {
   weight: string;
   status: UserImcStatus;
   level: UserLevel;
-  idade: number | null;
-  gender: "male" | "woman" | null;
+  age: number | null;
+  gender: "man" | "woman" | null;
 };
 type UserActions = {
   setHeight: (height: string) => void;
@@ -18,8 +18,10 @@ type UserActions = {
   setUserImc: (imc: number) => void;
   setUserImcStatus: (status: UserImcStatus) => void;
   setUserLevel: (level: UserLevel) => void;
+  setUserAge: (age: number) => void;
+  setUserGender: (gender: "man" | "woman") => void;
   getUserWaterRecommendation: () => number;
-  getUserBMR: () => void;
+  getUserBMR: () => number | null;
 };
 
 export const useUserStore = create<UserState & UserActions>((set, get) => ({
@@ -28,13 +30,15 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
   weight: "",
   status: "Indefinido",
   level: null,
-  idade: null,
+  age: null,
   gender: null,
   setHeight: (height) => set(() => ({ height })),
   setWeight: (weight) => set(() => ({ weight })),
   setUserImc: (imc) => set(() => ({ imc })),
   setUserImcStatus: (status) => set(() => ({ status })),
   setUserLevel: (level) => set(() => ({ level })),
+  setUserAge: (age) => set(() => ({ age })),
+  setUserGender: (gender) => set(() => ({ gender })),
   getUserWaterRecommendation: () => {
     const waterPerWeightCalculation = (Number(get().weight) * 35) / 1000;
     const userLevel = get().level;
@@ -43,5 +47,23 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
 
     return increaseWaterRecommendationByLevel(userLevel, waterPerWeightCalculation);
   },
-  getUserBMR: () => {},
+  getUserBMR: () => {
+    const userGender = get().gender;
+    const userAge = get().age;
+    const userWeight = get().weight;
+    const userHeight = get().height;
+
+    if (!userGender || !userAge) return null;
+    if (!Number(userWeight) || !Number(userHeight)) return null;
+
+    const numUserWeight = Number(userWeight);
+    const numUserHeight = Number(userHeight);
+
+    const maleUserBMR =
+      88.362 + 13.397 * numUserWeight + 4.799 * numUserHeight * 100 - 5.677 * userAge;
+    const femaleUserBMR =
+      447.593 + 9.247 * numUserWeight + 3.098 * numUserHeight * 100 - 4.33 * userAge;
+
+    return userGender === "man" ? maleUserBMR : femaleUserBMR;
+  },
 }));

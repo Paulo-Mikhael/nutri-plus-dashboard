@@ -1,12 +1,11 @@
 import { Bell } from "lucide-react";
-import user from "@/assets/user.png";
 import { Card } from "../ui/card";
-import Image from "next/image";
 import Logo from "../Logo";
 import { Button } from "../ui/button";
 import { Tooltip } from "../Tooltip";
 import { ThemeButton } from "../ThemeButton";
 import { SelectUserActivity } from "./SelectUserActivity";
+import { UserPerfilButton } from "./UserPerfilButton";
 
 export function Header() {
   return (
@@ -25,11 +24,7 @@ export function Header() {
           <span>
             <SelectUserActivity />
           </span>
-          <Tooltip tipText="Ver Perfil">
-            <Button variant="ghost" size="icon">
-              <Image className="size-8" src={user} alt="imagem do usuário" />
-            </Button>
-          </Tooltip>
+          <UserPerfilButton />
         </div>
       </Card>
     </header>
