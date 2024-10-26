@@ -2,6 +2,7 @@ import type { UserImcStatus } from "@/types/UserImcStatus";
 import type { UserLevel } from "@/types/UserLevel";
 import { create } from "zustand";
 import { increaseWaterRecommendationByLevel } from "./functions/increaseWaterRecommendationByLevel";
+import type { UserObjectives } from "@/types/UserObjectives";
 
 type UserState = {
   imc: number;
@@ -11,6 +12,7 @@ type UserState = {
   level: UserLevel;
   age: number | null;
   gender: "man" | "woman" | null;
+  objective: UserObjectives;
 };
 type UserActions = {
   setHeight: (height: string) => void;
@@ -20,6 +22,7 @@ type UserActions = {
   setUserLevel: (level: UserLevel) => void;
   setUserAge: (age: number) => void;
   setUserGender: (gender: "man" | "woman") => void;
+  setUserObjective: (objective: UserObjectives) => void;
   getUserWaterRecommendation: () => number;
   getUserBMR: () => number | null;
 };
@@ -32,6 +35,7 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
   level: null,
   age: null,
   gender: null,
+  objective: null,
   setHeight: (height) => set(() => ({ height })),
   setWeight: (weight) => set(() => ({ weight })),
   setUserImc: (imc) => set(() => ({ imc })),
@@ -39,6 +43,7 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
   setUserLevel: (level) => set(() => ({ level })),
   setUserAge: (age) => set(() => ({ age })),
   setUserGender: (gender) => set(() => ({ gender })),
+  setUserObjective: (objective) => set(() => ({ objective })),
   getUserWaterRecommendation: () => {
     const waterPerWeightCalculation = (Number(get().weight) * 35) / 1000;
     const userLevel = get().level;
