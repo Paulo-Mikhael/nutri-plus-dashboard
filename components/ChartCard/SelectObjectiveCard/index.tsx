@@ -2,18 +2,13 @@
 
 import { CardTitle } from "@/components/CardTitle";
 import { SelectForm } from "@/components/SelectForm";
+import { userObjectiveItems } from "@/data/user-objective-items";
 import { useSetUserObjective } from "@/hooks/use-set-user-objective";
-import type { SelectItems } from "@/types/SelectItems";
+import { userObjectivesEnum } from "@/types/enums";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const userObjectivesEnum = [
-  "emagracer",
-  "hipertrofia",
-  "definicao",
-  "hipertrofia e definicao",
-] as const;
 const formSchema = z.object({
   objective: z.enum(userObjectivesEnum),
 });
@@ -27,31 +22,6 @@ export function SelectiveObjectiveCard() {
       objective: undefined,
     },
   });
-  const items: SelectItems[] = [
-    {
-      group: {
-        name: "Meu objetivo",
-        items: [
-          {
-            value: "emagracer",
-            text: "Emagracer",
-          },
-          {
-            value: "hipertrofia",
-            text: "Hipertrofia",
-          },
-          {
-            value: "definicao",
-            text: "Definição",
-          },
-          {
-            value: "hipertrofia e definicao",
-            text: "Hipertrofia e Definição",
-          },
-        ],
-      },
-    },
-  ];
 
   function onSubmit(data: UserObjectivesSchema) {
     setUserObjective(data.objective);
@@ -67,7 +37,7 @@ export function SelectiveObjectiveCard() {
         submitOnChange
         form={form}
         name="objective"
-        items={items}
+        items={userObjectiveItems}
         placeholder="Selecione seu objetivo"
       />
     </form>

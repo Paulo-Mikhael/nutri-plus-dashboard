@@ -15,15 +15,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { InputForm } from "../InputForm";
-import type { SelectItems } from "@/types/SelectItems";
-import { SelectForm } from "../SelectForm";
 import { useSetUserGender } from "@/hooks/use-set-user-gender";
 import { useSetUserAge } from "@/hooks/use-set-user-age";
+import { userLevelEnum, userObjectivesEnum } from "@/types/enums";
+import { DialogInfosForm } from "./DialogInfosForm";
 
 const formSchema = z.object({
-  age: z.string().min(1, { message: "Este campo é obrigatório" }),
+  age: z.string().min(1, { message: "Esse campo é obrigatório" }),
   gender: z.enum(["man", "woman"], { message: "Selecione seu sexo" }),
+  height: z.string().min(1, { message: "Esse campo é obrigatório" }),
+  weight: z.string().min(1, { message: "Esse campo é obrigatório" }),
+  level: z.enum(userLevelEnum),
+  objective: z.enum(userObjectivesEnum),
 });
 type UserInfosSchema = z.infer<typeof formSchema>;
 
@@ -36,25 +39,12 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
     defaultValues: {
       age: "",
       gender: undefined,
+      height: "",
+      weight: "",
+      level: undefined,
+      objective: undefined,
     },
   });
-  const items: SelectItems[] = [
-    {
-      group: {
-        name: "Sexo",
-        items: [
-          {
-            text: "Masculino",
-            value: "man",
-          },
-          {
-            text: "Feminino",
-            value: "woman",
-          },
-        ],
-      },
-    },
-  ];
 
   function onSubmit(data: UserInfosSchema) {
     const userAge = data.age;
@@ -80,14 +70,7 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
               Insira seu gênero e idade para personalizar ainda mais seu dashboard.
             </DialogDescription>
           </DialogHeader>
-          <InputForm
-            formMessage
-            form={form}
-            name="age"
-            placeholder="Insira sua idade"
-            label="Idade:"
-          />
-          <SelectForm form={form} name="gender" items={items} placeholder="Selecione seu gênero:" />
+          <DialogInfosForm form={form} />
           <DialogFooter className="sm:justify-start">
             <Button type="submit" variant="secondary">
               Salvar

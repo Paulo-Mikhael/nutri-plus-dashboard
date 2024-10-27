@@ -99,7 +99,7 @@ export function ImcForm() {
           <InputForm placeholder="Insira sua altura" label="Altura:" form={form} name="height" />
           <InputForm placeholder="Insira seu peso" label="Peso:" form={form} name="weight" />
         </div>
-        <Button variant="default">Enviar</Button>
+        <Button variant="default">Calcular IMC</Button>
       </form>
     </div>
   );

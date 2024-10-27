@@ -37,7 +37,7 @@ export function CaloriesChart() {
   } satisfies ChartConfig;
 
   return (
-    <ChartContainer config={chartConfig} className="max-w-[75%]">
+    <ChartContainer config={chartConfig} className="max-w-[100%] max-h-96">
       <BarChart
         accessibilityLayer
         data={chartData}

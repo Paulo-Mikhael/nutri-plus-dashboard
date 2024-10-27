@@ -7,7 +7,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import type { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { useEffect } from "react";
+import type { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
 
 interface InputFormProps<T extends FieldValues> {
   form: UseFormReturn<T>;
@@ -15,6 +16,7 @@ interface InputFormProps<T extends FieldValues> {
   placeholder: string;
   label: string;
   formMessage?: boolean;
+  defaultValue?: string;
 }
 
 export function InputForm<T extends FieldValues>({
@@ -23,7 +25,12 @@ export function InputForm<T extends FieldValues>({
   placeholder,
   label,
   formMessage,
+  defaultValue,
 }: InputFormProps<T>) {
+  useEffect(() => {
+    form.setValue(name as Path<T>, defaultValue as PathValue<T, Path<T>>);
+  }, [defaultValue, name, form]);
+
   return (
     <Form {...form}>
       <FormField

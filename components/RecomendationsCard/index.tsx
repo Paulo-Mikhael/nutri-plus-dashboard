@@ -24,7 +24,7 @@ export function RecomendationsCard() {
     : noGenderUserInfoMessage;
 
   return (
-    <article className="h-full w-full flex flex-col gap-3 overflow-y-scroll max-lg:overflow-hidden max-lg:h-auto">
+    <article className="h-full w-full flex flex-col gap-3 overflow-y-scroll scrollbar-none max-lg:overflow-hidden max-lg:h-auto">
       <CardTitle
         h2="Recomendações"
         h3="De acordo com seus dados, você deve consumir diáriamente:"
