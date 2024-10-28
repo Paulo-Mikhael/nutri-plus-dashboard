@@ -1,15 +1,15 @@
 "use client";
 
-import { useGetUserBMR } from "@/hooks/use-get-user-bmr";
+import { useUserBMRData } from "@/hooks/use-user-bmr-data";
 import { CardTitle } from "../CardTitle";
 import { SquareInfoCard } from "../SquareInfoCard";
 import { useGetUserWaterRecommendation } from "@/hooks/use-get-user-water-recommedation";
 
 export function RecomendationsCard() {
   const userWaterRecommendation = useGetUserWaterRecommendation();
-  const userBMRReturn = useGetUserBMR();
-  const userBMR = userBMRReturn.get();
-  const userGender = userBMRReturn.gender;
+  const userBMRData = useUserBMRData();
+  const userBMR = userBMRData.getBMR();
+  const userGender = userBMRData.gender;
 
   const maleUserInfoMessage =
     "Sua taxa metabólica basal é calculada usando seu peso, altura, idade e sexo. (88,362 + (13,397 x p) + (4,799 x (a * 100)) - (5,677 x i))";

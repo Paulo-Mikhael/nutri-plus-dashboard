@@ -19,6 +19,11 @@ import { useSetUserGender } from "@/hooks/use-set-user-gender";
 import { useSetUserAge } from "@/hooks/use-set-user-age";
 import { userLevelEnum, userObjectivesEnum } from "@/types/enums";
 import { DialogInfosForm } from "./DialogInfosForm";
+import { useSetUserLevel } from "@/hooks/use-set-user-level";
+import { useSetUserObjective } from "@/hooks/use-set-user-objective";
+import { useSetUserHeight } from "@/hooks/use-set-user-height";
+import { useSetUserWeight } from "@/hooks/use-set-user-weight";
+import { submitHeightWeight } from "@/utils/submitHeightWeight";
 
 const formSchema = z.object({
   age: z.string().min(1, { message: "Esse campo é obrigatório" }),
@@ -31,9 +36,6 @@ const formSchema = z.object({
 type UserInfosSchema = z.infer<typeof formSchema>;
 
 export function UserInfosDialog({ children }: { children: ReactNode }) {
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
-  const setUserGender = useSetUserGender();
-  const setUserAge = useSetUserAge();
   const form = useForm<UserInfosSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,24 +47,47 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
       objective: undefined,
     },
   });
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const setUserAge = useSetUserAge();
+  const setUserGender = useSetUserGender();
+  const setUserLevel = useSetUserLevel();
+  const setUserObjective = useSetUserObjective();
+  const setUserHeight = useSetUserHeight();
+  const setUserWeight = useSetUserWeight();
 
   function onSubmit(data: UserInfosSchema) {
     const userAge = data.age;
+    const submitHeightWeightReturn = submitHeightWeight(data.height, data.weight);
+    const submitStatus = submitHeightWeightReturn.status;
+    const submitValues = submitHeightWeightReturn.values;
 
     if (!Number(userAge)) {
       form.setValue("age", "");
       return;
     }
+    if (submitStatus === "high-height" || submitStatus === "invalid-height") {
+      form.setValue("height", "");
+    }
+    if (submitStatus === "invalid-weight") {
+      form.setValue("weight", "");
+    }
 
-    setUserAge(Number(data.age));
+    if (!submitValues) return;
+
+    setUserAge(Number(userAge));
     setUserGender(data.gender);
+    setUserLevel(data.level);
+    setUserObjective(data.objective);
+    setUserHeight(String(submitValues.height));
+    setUserWeight(String(submitValues.weight));
+
     closeButtonRef.current?.click();
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-[600px]">
         <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle>Informações Pessoais</DialogTitle>

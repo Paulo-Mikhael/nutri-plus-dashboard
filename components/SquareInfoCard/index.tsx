@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Tooltip } from "../Tooltip";
 import { Card } from "../ui/card";
 
@@ -7,12 +8,24 @@ interface SquareInfoCardProps {
   h5: string;
   h6?: string;
   titleH5?: boolean; // If the text of h5 have to be the title of the card (for accessibity)
+  vertical?: boolean;
 }
 
-export function SquareInfoCard({ tipText, h4, h5, h6, titleH5 = false }: SquareInfoCardProps) {
+export function SquareInfoCard({
+  tipText,
+  h4,
+  h5,
+  h6,
+  titleH5 = false,
+  vertical = true,
+}: SquareInfoCardProps) {
   return (
     <Tooltip tipText={tipText}>
-      <Card className="p-5 flex flex-col gap-2 justify-center items-center h-full">
+      <Card
+        className={clsx("p-5 flex gap-2 items-center h-full", {
+          "flex-col justify-center": vertical,
+        })}
+      >
         {titleH5 === false ? (
           <>
             <h4 className="text-3xl text-center">{h4}</h4>

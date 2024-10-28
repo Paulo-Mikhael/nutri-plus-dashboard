@@ -9,6 +9,11 @@ import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { useUserHeight } from "@/hooks/use-user-height";
 import { useUserWeight } from "@/hooks/use-user-weight";
 import { useUserAge } from "@/hooks/use-user-age";
+import { useUserLevel } from "@/hooks/use-user-level";
+import { useUserObjective } from "@/hooks/use-user-objective";
+import { useUserGender } from "@/hooks/use-user-gender";
+import { formatHeight } from "@/utils/formatHeight";
+import { formatWeight } from "@/utils/formatWeight";
 
 interface DialogInfosFormProps<T extends FieldValues> {
   form: UseFormReturn<T>;
@@ -17,12 +22,15 @@ interface DialogInfosFormProps<T extends FieldValues> {
 export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosFormProps<T>) {
   const userHeight = useUserHeight();
   const userWeight = useUserWeight();
+  const userLevel = useUserLevel();
+  const userObjective = useUserObjective();
+  const userGender = useUserGender();
   const userAge = useUserAge();
 
   return (
     <div className="max-h-96 overflow-y-scroll scrollbar-none flex flex-col gap-4 p-1">
       <InputForm
-        defaultValue={userAge ? String(userAge) : ""}
+        defaultValue={userAge ? String(userAge) : undefined}
         formMessage
         form={form}
         name="age"
@@ -30,6 +38,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         label="Idade:"
       />
       <SelectForm
+        defaultValue={userGender ? String(userGender) : undefined}
         label="Sexo:"
         form={form}
         name="gender"
@@ -37,7 +46,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         placeholder="Selecione seu gênero:"
       />
       <InputForm
-        defaultValue={userHeight !== "" ? `${userHeight} m` : ""}
+        defaultValue={userHeight !== "" ? formatHeight(userHeight) : undefined}
         formMessage
         form={form}
         name="height"
@@ -45,7 +54,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         label="Altura:"
       />
       <InputForm
-        defaultValue={userWeight !== "" ? `${userWeight} kg` : ""}
+        defaultValue={userWeight !== "" ? formatWeight(userWeight) : undefined}
         formMessage
         form={form}
         name="weight"
@@ -53,6 +62,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         label="Peso:"
       />
       <SelectForm
+        defaultValue={userLevel ? String(userLevel) : undefined}
         label="Nível de atividade física:"
         form={form}
         name="level"
@@ -60,6 +70,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         placeholder="Selecione seu nível de atividade física:"
       />
       <SelectForm
+        defaultValue={userObjective ? String(userObjective) : undefined}
         label="Objetivo:"
         form={form}
         name="objective"

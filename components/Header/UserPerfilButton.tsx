@@ -18,7 +18,7 @@ export function UserPerfilButton() {
         <Button variant="ghost" size="icon">
           <Image
             width={32}
-            height={32}
+            height={26}
             className="rounded-full"
             src={userGender ? (userGender === "man" ? maleUser : femaleUser) : user}
             alt="imagem do usuário"

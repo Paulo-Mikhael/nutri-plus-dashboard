@@ -4,7 +4,6 @@ import Logo from "../Logo";
 import { Button } from "../ui/button";
 import { Tooltip } from "../Tooltip";
 import { ThemeButton } from "../ThemeButton";
-import { SelectUserActivity } from "./SelectUserActivity";
 import { UserPerfilButton } from "./UserPerfilButton";
 
 export function Header() {
@@ -21,9 +20,6 @@ export function Header() {
               <Bell className="h-[1.2rem] w-[1.2rem] cursor-pointer text-slate-800 dark:text-slate-100" />
             </Button>
           </Tooltip>
-          <span>
-            <SelectUserActivity />
-          </span>
           <UserPerfilButton />
         </div>
       </Card>

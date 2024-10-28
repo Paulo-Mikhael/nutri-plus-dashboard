@@ -9,10 +9,10 @@ import {
   SelectLabel,
   SelectItem,
 } from "../ui/select";
-import type { FieldValues, Path, UseFormReturn } from "react-hook-form";
+import type { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
 import type { SelectItems } from "@/types/SelectItems";
 import { FormField, FormItem, Form, FormLabel } from "../ui/form";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface SelectInputProps<T extends FieldValues> {
   form: UseFormReturn<T>;
@@ -21,6 +21,7 @@ interface SelectInputProps<T extends FieldValues> {
   items: SelectItems[];
   submitOnChange?: boolean;
   label?: string;
+  defaultValue?: string;
 }
 
 export function SelectForm<T extends FieldValues>({
@@ -30,8 +31,13 @@ export function SelectForm<T extends FieldValues>({
   items,
   submitOnChange,
   label,
+  defaultValue,
 }: SelectInputProps<T>) {
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    form.setValue(name as Path<T>, defaultValue as PathValue<T, Path<T>>);
+  }, [defaultValue, name, form]);
 
   return (
     <Form {...form}>
@@ -44,9 +50,9 @@ export function SelectForm<T extends FieldValues>({
             <Select
               onValueChange={(value) => {
                 field.onChange(value);
-                submitButtonRef.current?.click();
+                submitOnChange && submitButtonRef.current?.click();
               }}
-              defaultValue={field.value ? String(field.value) : undefined}
+              defaultValue={field.value ? field.value : undefined}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={placeholder} />
@@ -67,7 +73,7 @@ export function SelectForm<T extends FieldValues>({
           </FormItem>
         )}
       />
-      {submitOnChange && <button ref={submitButtonRef} type="submit" hidden />}
+      <button ref={submitButtonRef} type="submit" hidden />
     </Form>
   );
 }

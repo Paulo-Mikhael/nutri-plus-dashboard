@@ -1,9 +1,9 @@
 "use client";
 
 import { CardTitle } from "@/components/CardTitle";
-import { SelectForm } from "@/components/SelectForm";
-import { userObjectiveItems } from "@/data/user-objective-items";
+import { TextCard } from "@/components/TextCard";
 import { useSetUserObjective } from "@/hooks/use-set-user-objective";
+import { useUserObjective } from "@/hooks/use-user-objective";
 import { userObjectivesEnum } from "@/types/enums";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,7 @@ type UserObjectivesSchema = z.infer<typeof formSchema>;
 
 export function SelectiveObjectiveCard() {
   const setUserObjective = useSetUserObjective();
+  const userObjective = useUserObjective();
   const form = useForm<UserObjectivesSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,13 +34,18 @@ export function SelectiveObjectiveCard() {
         h2="Gráfico nutricional"
         h3="Quantidade de calorias que você deve ingerir durante a semana para alcançar seu objetivo"
       />
-      <SelectForm
-        submitOnChange
-        form={form}
-        name="objective"
-        items={userObjectiveItems}
-        placeholder="Selecione seu objetivo"
-      />
+      <span className="flex gap-4 text-xl">
+        <TextCard
+          headingElement="h4"
+          text={`Seu objetivo: ${userObjective ? userObjective : "Não Definido"}`}
+          minHeight={400}
+        />
+        <TextCard
+          headingElement="h5"
+          text="Com base no seu objetivo e sua Taxa Metabólica Basal, seu consumo semanal de calorias deve
+          ser 12000. O gráfico abaixo mostra essas 12000 calorias distribuidas pela semana e suas calorias consumidas no dia, para mais informações vá para 'Minha Dieta'"
+        />
+      </span>
     </form>
   );
 }
