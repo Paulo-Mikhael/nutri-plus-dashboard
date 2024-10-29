@@ -14,7 +14,7 @@ const formSchema = z.object({
 });
 type UserObjectivesSchema = z.infer<typeof formSchema>;
 
-export function SelectiveObjectiveCard() {
+export function ChartCardHeader() {
   const setUserObjective = useSetUserObjective();
   const userObjective = useUserObjective();
   const form = useForm<UserObjectivesSchema>({
@@ -37,8 +37,8 @@ export function SelectiveObjectiveCard() {
       <span className="flex gap-4 text-xl">
         <TextCard
           headingElement="h4"
-          text={`Seu objetivo: ${userObjective ? userObjective : "Não Definido"}`}
-          minHeight={400}
+          text={`Meu objetivo: ${userObjective ? userObjective : "Não Definido"}`}
+          minWidth="min-w-[300px]"
         />
         <TextCard
           headingElement="h5"

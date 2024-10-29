@@ -50,7 +50,7 @@ export function SelectForm<T extends FieldValues>({
             <Select
               onValueChange={(value) => {
                 field.onChange(value);
-                submitOnChange && submitButtonRef.current?.click();
+                submitButtonRef.current?.click();
               }}
               defaultValue={field.value ? field.value : undefined}
             >
@@ -73,7 +73,7 @@ export function SelectForm<T extends FieldValues>({
           </FormItem>
         )}
       />
-      <button ref={submitButtonRef} type="submit" hidden />
+      {submitOnChange && <button ref={submitButtonRef} type="submit" hidden />}
     </Form>
   );
 }

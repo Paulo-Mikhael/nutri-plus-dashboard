@@ -8,8 +8,6 @@ import { formatHeight } from "@/utils/formatHeight";
 import { formatWeight } from "@/utils/formatWeight";
 import { useSetUserWeight } from "@/hooks/use-set-user-weight";
 import { useSetUserHeight } from "@/hooks/use-set-user-height";
-import { useUserHeight } from "@/hooks/use-user-height";
-import { useUserWeight } from "@/hooks/use-user-weight";
 import { Button } from "@/components/ui/button";
 import { SquareInfoCard } from "@/components/SquareInfoCard";
 import { InputForm } from "@/components/InputForm";

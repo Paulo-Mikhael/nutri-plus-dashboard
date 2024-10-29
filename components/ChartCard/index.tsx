@@ -1,10 +1,10 @@
 import { CaloriesChart } from "./CaloriesChart";
-import { SelectiveObjectiveCard } from "./SelectObjectiveCard";
+import { ChartCardHeader } from "./ChartCardHeader";
 
 export function ChartCard() {
   return (
     <div className="h-full flex flex-col gap-10">
-      <SelectiveObjectiveCard />
+      <ChartCardHeader />
       <CaloriesChart />
     </div>
   );
