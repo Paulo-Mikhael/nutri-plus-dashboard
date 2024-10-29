@@ -1,10 +1,10 @@
-import type { GetImcData } from "@/types/GetImcData";
+import type { GetImcReturn } from "@/types/GetImcReturn";
 import { useUserStore } from "./state/store";
 import { useUserHeight } from "./use-user-height";
 import { useUserWeight } from "./use-user-weight";
 
 interface UseUserImcDataReturn {
-  getImc: () => GetImcData;
+  getImc: () => GetImcReturn;
   height: string;
   weight: string;
 }
