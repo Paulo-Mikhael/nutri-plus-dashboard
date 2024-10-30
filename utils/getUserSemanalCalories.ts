@@ -1,9 +1,9 @@
 import { useUserBMRData } from "@/hooks/use-user-bmr-data";
 import { useUserLevel } from "@/hooks/use-user-level";
 import { useUserObjective } from "@/hooks/use-user-objective";
-import type { GetSemanalCaloriesReturn } from "@/types/GetSemanalCaloriesReturn";
+import type { GetWeeklyCaloriesReturn } from "@/types/GetSemanalCaloriesReturn";
 
-export function getUserSemanalCalories(): GetSemanalCaloriesReturn | null {
+export function getUserWeeklyCalories(): GetWeeklyCaloriesReturn | null {
   let userGET = 0;
   const userBMRReturn = useUserBMRData();
   const userBMR = userBMRReturn.getBMR();
@@ -48,12 +48,12 @@ export function getUserSemanalCalories(): GetSemanalCaloriesReturn | null {
           strongDay: userGET * 1.1,
           lightDay: userGET * 0.8,
         },
-        semanalCalories: userGET * 1.1 * 4 * (userGET * 0.8 * 3), // 4 days of hard trainings and 3 days of light trainings
+        weeklyCalories: userGET * 1.1 * 4 + userGET * 0.8 * 3, // 4 days of hard trainings and 3 days of light trainings
       };
   }
 
   return {
     dailyCalories: userGET,
-    semanalCalories: userGET * 7,
+    weeklyCalories: userGET * 7,
   };
 }

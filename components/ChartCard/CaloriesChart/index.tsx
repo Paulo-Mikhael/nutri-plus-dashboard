@@ -7,40 +7,30 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "../../ui/chart";
-
-interface CaloriesChartInfo {
-  day: string;
-  goal: number;
-  myKcal: number;
-}
+import { caloriesChartConfig } from "@/data/calories-chart-data";
+import { useGetUserCalories } from "@/hooks/use-get-user-calories";
+import { getChartByWeeklyCalories } from "@/utils/getChartByWeeklyCalories";
 
 export function CaloriesChart() {
-  const chartData: CaloriesChartInfo[] = [
-    { day: "21 de outubro", goal: 1731, myKcal: 1500 },
-    { day: "22 de outubro", goal: 1931, myKcal: 0 },
-    { day: "23 de outubro", goal: 3400, myKcal: 0 },
-    { day: "24 de outubro", goal: 1700, myKcal: 0 },
-    { day: "25 de outubro", goal: 1731, myKcal: 0 },
-    { day: "26 de outubro", goal: 1931, myKcal: 0 },
-    { day: "27 de outubro", goal: 3400, myKcal: 0 },
-    { day: "28 de outubro", goal: 1700, myKcal: 0 },
-  ];
-  const chartConfig = {
-    goal: {
-      label: "Meta",
-    },
-    myKcal: {
-      label: "Minhas Calorias",
-    },
-  } satisfies ChartConfig;
+  const userCalories = useGetUserCalories();
+
+  if (!userCalories) {
+    return (
+      <p className="text-lg">
+        Informe os dados pedidos em seu perfil para gerar um gráfico de como deve ser sua ingestão
+        calórica diária para alcançar seu objetivo.
+      </p>
+    );
+  }
+
+  const userWeelkyCaloriesChart = getChartByWeeklyCalories(userCalories.weeklyCalories);
 
   return (
-    <ChartContainer config={chartConfig} className="max-w-[100%] max-h-96">
+    <ChartContainer config={caloriesChartConfig} className="max-w-[100%] max-h-96">
       <BarChart
         accessibilityLayer
-        data={chartData}
+        data={userWeelkyCaloriesChart}
         margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
       >
         <CartesianGrid vertical={true} strokeDasharray="3 3" />

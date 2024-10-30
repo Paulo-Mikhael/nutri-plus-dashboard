@@ -8,16 +8,12 @@ import { Button } from "../ui/button";
 import { UserInfosDialog } from "../UserInfosDialog";
 import Image from "next/image";
 import { useUserGender } from "@/hooks/use-user-gender";
-import { useUserStore } from "@/hooks/state/store";
 
 export function UserPerfilButton() {
   const userGender = useUserGender();
-  const userSemanalCaloriesReturn = useUserStore((state) => state.getUserSemanalCalories);
-  const userSemanalCalories = userSemanalCaloriesReturn();
 
   return (
     <>
-      <p>{userSemanalCalories ? userSemanalCalories.semanalCalories : "nulo"}</p>
       <Tooltip tipText="Ver Perfil">
         <UserInfosDialog>
           <Button variant="ghost" size="icon">

@@ -1,5 +1,5 @@
-export type GetSemanalCaloriesReturn = {
-  semanalCalories: number;
+export type GetWeeklyCaloriesReturn = {
+  weeklyCalories: number;
   dailyCalories: DailyCalories;
 };
 

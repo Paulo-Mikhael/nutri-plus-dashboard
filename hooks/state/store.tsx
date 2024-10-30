@@ -1,11 +1,11 @@
 import type { UserLevel } from "@/types/UserLevel";
 import type { UserObjectives } from "@/types/UserObjectives";
-import type { GetSemanalCaloriesReturn } from "@/types/GetSemanalCaloriesReturn";
+import type { GetWeeklyCaloriesReturn } from "@/types/GetSemanalCaloriesReturn";
 import type { GetImcReturn } from "@/types/GetImcReturn";
 import { create } from "zustand";
 import { increaseWaterRecommendationByLevel } from "./functions/increaseWaterRecommendationByLevel";
 import { takeImcStatus } from "@/utils/takeImcStatus";
-import { getUserSemanalCalories } from "@/utils/getUserSemanalCalories";
+import { getUserWeeklyCalories } from "@/utils/getUserSemanalCalories";
 
 type UserState = {
   height: string;
@@ -25,7 +25,7 @@ type UserActions = {
   getUserImc: () => GetImcReturn;
   getUserWaterRecommendation: () => number;
   getUserBMR: () => number | null;
-  getUserSemanalCalories: () => GetSemanalCaloriesReturn | null;
+  getUserWeeklyCalories: () => GetWeeklyCaloriesReturn | null;
 };
 
 export const useUserStore = create<UserState & UserActions>((set, get) => ({
@@ -81,5 +81,5 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
 
     return userGender === "man" ? maleUserBMR : femaleUserBMR;
   },
-  getUserSemanalCalories,
+  getUserWeeklyCalories,
 }));
