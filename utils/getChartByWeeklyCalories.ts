@@ -2,6 +2,15 @@ import type { CaloriesChartInfo } from "@/types/CaloriesChartInfo";
 
 export function getChartByWeeklyCalories(weeklyCalories: number): CaloriesChartInfo[] {
   const dailyCalories = parseFloat((weeklyCalories / 7).toFixed(0));
+  const dailyCaloriesRandomized = [
+    dailyCalories - 80,
+    dailyCalories + 80,
+    dailyCalories - 100,
+    dailyCalories + 100,
+    dailyCalories - 200,
+    dailyCalories + 200,
+    dailyCalories,
+  ];
   const userCaloriesChart: CaloriesChartInfo[] = [];
   const days = [
     "21 de outubro",
@@ -16,7 +25,7 @@ export function getChartByWeeklyCalories(weeklyCalories: number): CaloriesChartI
   for (let i = 0; i < 7; i++) {
     userCaloriesChart.push({
       day: days[i],
-      goal: dailyCalories,
+      goal: dailyCaloriesRandomized[i],
       myKcal: 0,
     });
   }
