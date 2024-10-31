@@ -2,6 +2,7 @@
 
 import { CardTitle } from "@/components/CardTitle";
 import { TextCard } from "@/components/TextCard";
+import { useGetUserCalories } from "@/hooks/use-get-user-calories";
 import { useSetUserObjective } from "@/hooks/use-set-user-objective";
 import { useUserObjective } from "@/hooks/use-user-objective";
 import { userObjectivesEnum } from "@/types/enums";
@@ -15,6 +16,8 @@ const formSchema = z.object({
 type UserObjectivesSchema = z.infer<typeof formSchema>;
 
 export function ChartCardHeader() {
+  const userCaloriesState = useGetUserCalories();
+  const userCalories = userCaloriesState ? userCaloriesState.weeklyCalories.toFixed(0) : 0;
   const setUserObjective = useSetUserObjective();
   const userObjective = useUserObjective();
   const form = useForm<UserObjectivesSchema>({
@@ -42,8 +45,7 @@ export function ChartCardHeader() {
         />
         <TextCard
           headingElement="h5"
-          text="Com base no seu objetivo e sua Taxa Metabólica Basal, seu consumo semanal de calorias deve
-          ser 12000. O gráfico abaixo mostra essas 12000 calorias distribuidas pela semana e suas calorias consumidas no dia, para mais informações vá para 'Minha Dieta'"
+          text={`Com base no seu objetivo e sua Taxa Metabólica Basal, seu consumo semanal de calorias deve ser ${userCalories}. O gráfico abaixo mostra essas ${userCalories} calorias distribuídas pela semana e suas calorias consumidas no dia, para informações vá para 'Minha Dieta'`}
         />
       </span>
     </form>
