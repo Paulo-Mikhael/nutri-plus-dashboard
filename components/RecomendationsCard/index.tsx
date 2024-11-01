@@ -31,7 +31,7 @@ export function RecomendationsCard() {
       />
       <div className="flex justify-between gap-2">
         <SquareInfoCard
-          h4={`${userWaterRecommendation()} L`}
+          h4={`${userWaterRecommendation().toFixed(1)} L`}
           h5="Consumo de Água"
           titleH5
           tipText="De acordo com seu peso e nível físico, seu consumo de água diário deve ser esse. ((p * 35) / 1000)"

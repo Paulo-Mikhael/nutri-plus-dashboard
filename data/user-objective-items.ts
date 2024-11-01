@@ -10,12 +10,12 @@ export const userObjectiveItems: SelectItems[] = [
           text: "Emagracer",
         },
         {
-          value: "hipertrofia",
-          text: "Hipertrofia",
-        },
-        {
           value: "definicao",
           text: "Definição",
+        },
+        {
+          value: "hipertrofia",
+          text: "Hipertrofia",
         },
         {
           value: "hipertrofia e definicao",

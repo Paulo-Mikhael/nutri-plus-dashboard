@@ -25,11 +25,12 @@ import { useSetUserHeight } from "@/hooks/use-set-user-height";
 import { useSetUserWeight } from "@/hooks/use-set-user-weight";
 import { submitHeightWeight } from "@/utils/submitHeightWeight";
 
+const requiredMessage = "Esse campo é obrigatório";
 const formSchema = z.object({
-  age: z.string().min(1, { message: "Esse campo é obrigatório" }),
-  gender: z.enum(["man", "woman"], { message: "Selecione seu sexo" }),
-  height: z.string().min(1, { message: "Esse campo é obrigatório" }),
-  weight: z.string().min(1, { message: "Esse campo é obrigatório" }),
+  age: z.string({ message: requiredMessage }).min(1, { message: requiredMessage }),
+  gender: z.enum(["man", "woman"]),
+  height: z.string({ message: requiredMessage }).min(1, { message: requiredMessage }),
+  weight: z.string({ message: requiredMessage }).min(1, { message: requiredMessage }),
   level: z.enum(userLevelEnum),
   objective: z.enum(userObjectivesEnum),
 });
@@ -97,7 +98,7 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
           </DialogHeader>
           <DialogInfosForm form={form} />
           <DialogFooter className="sm:justify-start">
-            <Button type="submit" variant="secondary">
+            <Button type="submit" variant={!form.formState.isValid ? "outline" : "default"}>
               Salvar
             </Button>
             <DialogClose>

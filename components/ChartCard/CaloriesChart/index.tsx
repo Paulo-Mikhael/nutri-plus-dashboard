@@ -15,14 +15,7 @@ import { getChartByWeeklyCalories } from "@/utils/getChartByWeeklyCalories";
 export function CaloriesChart() {
   const userCalories = useGetUserCalories();
 
-  if (!userCalories) {
-    return (
-      <p className="text-lg">
-        Informe os dados pedidos em seu perfil para gerar um gráfico de como deve ser sua ingestão
-        calórica diária para alcançar seu objetivo.
-      </p>
-    );
-  }
+  if (!userCalories) return;
 
   const userWeelkyCaloriesChart = getChartByWeeklyCalories(userCalories.weeklyCalories);
 

@@ -64,7 +64,7 @@ export function ImcForm() {
     <div className="flex gap-4">
       <SquareInfoCard
         tipText="Seu IMC indica se você está numa faixa de peso saudável, calculado usando o peso e altura fornecidos. (p / a^2)"
-        h4={String(getUserImc.value)}
+        h4={getUserImc.value.toFixed(2)}
         h5={String(getUserImc.status)}
       />
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-2">

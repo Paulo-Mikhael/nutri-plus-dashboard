@@ -26,6 +26,9 @@ export function ChartCardHeader() {
       objective: undefined,
     },
   });
+  const chartInfoMessage = `Com base no seu objetivo e sua Taxa Metabólica Basal, seu consumo semanal de calorias deve ser ${userCalories} kcal. O gráfico abaixo mostra essas ${userCalories} calorias distribuídas pela semana e suas calorias consumidas no dia, para informações vá para 'Minha Dieta'.`;
+  const getChartInfoMessage =
+    "Informe os dados pedidos em seu perfil para gerar um gráfico de como deve ser sua ingestão calórica diária para alcançar seu objetivo.";
 
   function onSubmit(data: UserObjectivesSchema) {
     setUserObjective(data.objective);
@@ -39,13 +42,15 @@ export function ChartCardHeader() {
       />
       <span className="flex gap-4 text-xl">
         <TextCard
+          className="capitalize"
           headingElement="h4"
           text={`Meu objetivo: ${userObjective ? userObjective : "Não Definido"}`}
           minWidth="min-w-[300px]"
         />
         <TextCard
+          danger={userCalories === 0}
           headingElement="h5"
-          text={`Com base no seu objetivo e sua Taxa Metabólica Basal, seu consumo semanal de calorias deve ser ${userCalories}. O gráfico abaixo mostra essas ${userCalories} calorias distribuídas pela semana e suas calorias consumidas no dia, para informações vá para 'Minha Dieta'`}
+          text={userCalories !== 0 ? chartInfoMessage : getChartInfoMessage}
         />
       </span>
     </form>
