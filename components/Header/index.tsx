@@ -1,8 +1,5 @@
-import { Bell } from "lucide-react";
 import { Card } from "../ui/card";
 import Logo from "../Logo";
-import { Button } from "../ui/button";
-import { Tooltip } from "../Tooltip";
 import { ThemeButton } from "../ThemeButton";
 import { UserPerfilButton } from "./UserPerfilButton";
 
@@ -15,11 +12,6 @@ export function Header() {
         </div>
         <div className="flex items-center gap-2">
           <ThemeButton />
-          <Tooltip tipText="Minhas Notificações">
-            <Button variant="outline" size="icon">
-              <Bell className="h-[1.2rem] w-[1.2rem] cursor-pointer text-slate-800 dark:text-slate-100" />
-            </Button>
-          </Tooltip>
           <UserPerfilButton />
         </div>
       </Card>

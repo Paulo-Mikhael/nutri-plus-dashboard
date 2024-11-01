@@ -18,9 +18,9 @@ export function UserPerfilButton() {
         <UserInfosDialog>
           <Button variant="ghost" size="icon">
             <Image
-              width={32}
-              height={26}
-              className="rounded-full"
+              width={0}
+              height={0}
+              className="rounded-full size-8"
               src={userGender ? (userGender === "man" ? maleUser : femaleUser) : user}
               alt="imagem do usuário"
             />

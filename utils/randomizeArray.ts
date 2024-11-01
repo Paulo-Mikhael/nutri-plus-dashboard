@@ -1,7 +1,7 @@
-export function randomizeArray<T>(array: Array<T>) {
-  for (let i = array.length - 1; i > 0; i--) {
+export function randomizeArray<T>(arr: Array<T>) {
+  for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
+    [arr[i], arr[j]] = [arr[j], arr[i]]; // Troca os elementos
   }
-  return array;
+  return arr;
 }
