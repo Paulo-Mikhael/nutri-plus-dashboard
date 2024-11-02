@@ -1,4 +1,4 @@
-import { useUserStore } from "./state/store";
+import { useUserStore } from "./state/UserStore";
 
 export function useSetUserAge(): (age: number) => void {
   const setUserAge = useUserStore((state) => state.setUserAge);

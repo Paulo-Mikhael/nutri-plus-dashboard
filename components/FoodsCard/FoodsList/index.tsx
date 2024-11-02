@@ -1,15 +1,8 @@
-import { foodItems } from "@/data/food-items";
+import { useFilteredFoodsByName } from "@/hooks/use-filtered-foods";
 import { FoodItemInfoCard } from "./FoodItemInfoCard";
 
 export function FoodsList({ searchedName }: { searchedName: string }) {
-  const foodsCopy = [...foodItems];
-  const organizedFoods = foodsCopy.sort((a, b) => a.name.localeCompare(b.name));
-  const filteredFoods = organizedFoods.filter((item) => {
-    const foodName = item.name.toLowerCase().trim();
-    const normalizedSearch = searchedName.toLowerCase().trim();
-
-    return foodName.includes(normalizedSearch);
-  });
+  const filteredFoods = useFilteredFoodsByName(searchedName);
 
   return (
     <div className="w-full flex gap-4 overflow-x-scroll">

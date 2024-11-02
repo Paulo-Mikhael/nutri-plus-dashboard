@@ -1,4 +1,4 @@
-import { useUserStore } from "./state/store";
+import { useUserStore } from "./state/UserStore";
 
 export function useSetUserWeight(): (weight: string) => void {
   const setUserWeight = useUserStore((state) => state.setWeight);

@@ -13,6 +13,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 10,
     potassium: 181,
     carbohydrates: 12,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -25,6 +26,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 10,
     potassium: 112,
     carbohydrates: 8,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -37,6 +39,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 176,
     potassium: 1393,
     carbohydrates: 63,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -49,6 +52,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 12,
     potassium: 35,
     carbohydrates: 28,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -61,6 +65,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 13,
     potassium: 194,
     carbohydrates: 2.9,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -73,6 +78,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 5,
     potassium: 107,
     carbohydrates: 14,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -85,6 +91,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 27,
     potassium: 358,
     carbohydrates: 23,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -97,6 +104,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 12,
     potassium: 320,
     carbohydrates: 10,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -109,6 +117,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 10,
     potassium: 126,
     carbohydrates: 1.1,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -121,6 +130,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 7,
     potassium: 116,
     carbohydrates: 15,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -133,6 +143,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 5,
     potassium: 191,
     carbohydrates: 17,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -145,6 +156,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 53,
     potassium: 223,
     carbohydrates: 75,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -157,6 +169,7 @@ export const foodItems: FoodItem[] = [
     magnesium: 10,
     potassium: 168,
     carbohydrates: 15,
+    selected: false,
   },
   {
     id: uuidV4(),
@@ -169,5 +182,6 @@ export const foodItems: FoodItem[] = [
     magnesium: 12,
     potassium: 109,
     carbohydrates: 13,
+    selected: false,
   },
 ];

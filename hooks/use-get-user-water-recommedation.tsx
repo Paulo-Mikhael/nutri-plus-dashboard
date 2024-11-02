@@ -1,4 +1,4 @@
-import { useUserStore } from "./state/store";
+import { useUserStore } from "./state/UserStore";
 
 export function useGetUserWaterRecommendation(): () => number {
   const userLevel = useUserStore((state) => state.level);

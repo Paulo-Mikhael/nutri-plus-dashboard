@@ -9,4 +9,5 @@ export type FoodItem = {
   magnesium: number; // in mg
   potassium: number; // in mg
   carbohydrates: number; // in g
+  selected: boolean;
 };

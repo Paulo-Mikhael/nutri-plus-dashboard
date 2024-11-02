@@ -84,7 +84,7 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Dialog trigger={children}>
+    <Dialog asChild trigger={children}>
       <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
         <DialogHeader>
           <DialogTitle>Informações Pessoais</DialogTitle>

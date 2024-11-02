@@ -10,8 +10,8 @@ export function Tooltip({ children, tipText }: { children: ReactNode; tipText: s
   return (
     <TooltipProvider>
       <TooltipContainer>
-        <TooltipTrigger asChild>
-          <span className="cursor-pointer">{children}</span>
+        <TooltipTrigger className="cursor-pointer" asChild>
+          {children}
         </TooltipTrigger>
         <TooltipContent>
           <div className="sr-only">{tipText}</div>

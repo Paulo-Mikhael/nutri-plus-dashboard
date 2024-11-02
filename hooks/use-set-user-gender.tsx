@@ -1,4 +1,4 @@
-import { useUserStore } from "./state/store";
+import { useUserStore } from "./state/UserStore";
 
 export function useSetUserGender(): (gender: "man" | "woman") => void {
   const setUserGender = useUserStore((state) => state.setUserGender);

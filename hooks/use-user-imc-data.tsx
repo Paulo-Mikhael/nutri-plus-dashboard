@@ -1,5 +1,5 @@
 import type { GetImcReturn } from "@/types/GetImcReturn";
-import { useUserStore } from "./state/store";
+import { useUserStore } from "./state/UserStore";
 import { useUserHeight } from "./use-user-height";
 import { useUserWeight } from "./use-user-weight";
 

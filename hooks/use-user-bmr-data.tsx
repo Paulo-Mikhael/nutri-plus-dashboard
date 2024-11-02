@@ -1,4 +1,4 @@
-import { useUserStore } from "./state/store";
+import { useUserStore } from "./state/UserStore";
 
 interface UseUserBMRDataReturn {
   getBMR: () => number | null;
