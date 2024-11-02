@@ -2,14 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
   DialogClose,
-  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, type ReactNode } from "react";
@@ -24,6 +21,7 @@ import { useSetUserObjective } from "@/hooks/use-set-user-objective";
 import { useSetUserHeight } from "@/hooks/use-set-user-height";
 import { useSetUserWeight } from "@/hooks/use-set-user-weight";
 import { submitHeightWeight } from "@/utils/submitHeightWeight";
+import { Dialog } from "../Dialog";
 
 const requiredMessage = "Esse campo é obrigatório";
 const formSchema = z.object({
@@ -86,27 +84,24 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[600px]">
-        <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
-          <DialogHeader>
-            <DialogTitle>Informações Pessoais</DialogTitle>
-            <DialogDescription>
-              Insira seu gênero e idade para personalizar ainda mais seu dashboard.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogInfosForm form={form} />
-          <DialogFooter className="sm:justify-start">
-            <Button type="submit" variant={!form.formState.isValid ? "outline" : "default"}>
-              Salvar
-            </Button>
-            <DialogClose>
-              <button hidden type="button" ref={closeButtonRef} />
-            </DialogClose>
-          </DialogFooter>
-        </form>
-      </DialogContent>
+    <Dialog trigger={children}>
+      <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <DialogHeader>
+          <DialogTitle>Informações Pessoais</DialogTitle>
+          <DialogDescription>
+            Insira alguns dados sobre você para obter mais informações em seu dashboard.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogInfosForm form={form} />
+        <DialogFooter className="sm:justify-start">
+          <Button type="submit" variant={!form.formState.isValid ? "outline" : "default"}>
+            Salvar
+          </Button>
+          <DialogClose>
+            <button hidden type="button" ref={closeButtonRef} />
+          </DialogClose>
+        </DialogFooter>
+      </form>
     </Dialog>
   );
 }
