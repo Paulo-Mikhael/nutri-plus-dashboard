@@ -9,6 +9,7 @@ import { FoodsDialog } from "./FoodsDialog";
 import { useFoodsState } from "@/hooks/use-foods-state";
 import { useClearFoodSelection } from "@/hooks/use-clear-food-selection";
 import { Button } from "@/components/ui/button";
+import { CheckMealDialog } from "./CheckMealDialog";
 
 interface FoodInputProps {
   form: UseFormReturn<{
@@ -32,8 +33,10 @@ export function FoodInput({ form }: FoodInputProps) {
         </FoodsDialog>
       )}
       {foodsState === "selecting-meal" && (
-        <div>
-          <Button type="button">Conferir Refeição</Button>
+        <div className="flex gap-2">
+          <CheckMealDialog>
+            <Button type="button">Conferir Refeição</Button>
+          </CheckMealDialog>
           <Button
             type="button"
             variant="destructive"

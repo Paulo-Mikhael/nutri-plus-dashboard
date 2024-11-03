@@ -94,7 +94,7 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
         </DialogHeader>
         <DialogInfosForm form={form} />
         <DialogFooter className="sm:justify-start">
-          <Button type="submit" variant={!form.formState.isValid ? "outline" : "default"}>
+          <Button type="submit" variant={!form.formState.isValid ? "destructive" : "default"}>
             Salvar
           </Button>
           <DialogClose>

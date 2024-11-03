@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FoodsList } from "./FoodsList";
 import { FoodInput } from "./FoodsList/FoodInput";
+import { useFilteredFoodsByName } from "@/hooks/use-filtered-foods";
 
 const formSchema = z.object({
   foodName: z.string().min(1).nullable(),
@@ -19,6 +20,7 @@ export function FoodsCard() {
     },
   });
   const foodName = form.watch("foodName");
+  const filteredFoods = useFilteredFoodsByName(foodName ? foodName : "");
 
   return (
     <form
@@ -26,17 +28,19 @@ export function FoodsCard() {
       className="w-full flex flex-col gap-4"
     >
       <FoodInput form={form} />
-      <FoodsList searchedName={foodName ? foodName : ""} />
-      <h3>
-        Nutrientes de 100 gramas dos alimentos acima. Fonte:{" "}
-        <a
-          className="underline text-cyan-500"
-          target="_blank"
-          href="https://fdc.nal.usda.gov/food-search?type=Foundation&query="
-        >
-          USDA
-        </a>
-      </h3>
+      <FoodsList nullListMessage="Sem alimentos com esse nome" foods={filteredFoods} />
+      {filteredFoods.length > 0 && (
+        <h3>
+          Nutrientes de 100 gramas dos alimentos acima. Fonte:{" "}
+          <a
+            className="underline text-cyan-500"
+            target="_blank"
+            href="https://fdc.nal.usda.gov/food-search?type=Foundation&query="
+          >
+            USDA
+          </a>
+        </h3>
+      )}
     </form>
   );
 }
