@@ -83,6 +83,7 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
       description="Insira alguns dados sobre você para obter mais informações em seu dashboard."
       asChild
       trigger={children}
+      maxWidth="max-w-96"
     >
       <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
         <DialogInfosForm form={form} />

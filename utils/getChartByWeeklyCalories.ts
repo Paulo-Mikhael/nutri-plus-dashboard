@@ -1,18 +1,22 @@
 import type { CaloriesChartInfo } from "@/types/CaloriesChartInfo";
+import dayjs from "dayjs";
+import ptBr from "dayjs/locale/pt-br";
+
+dayjs.locale(ptBr);
 
 export function getChartByWeeklyCalories(weeklyCalories: number): CaloriesChartInfo[] {
   const dailyCalories = parseFloat((weeklyCalories / 7).toFixed(0));
   const reajustValues: number[] = [150, 100, 200];
   const userCaloriesChart: CaloriesChartInfo[] = [];
-  const days = [
-    "21 de outubro",
-    "22 de outubro",
-    "23 de outubro",
-    "24 de outubro",
-    "25 de outubro",
-    "26 de outubro",
-    "27 de outubro",
-  ];
+  const days: string[] = [];
+  const daysFromNow = 7;
+  const getDay = (daysToJump = 0) => {
+    return dayjs().add(daysToJump, "day").format("DD [de] MMMM [de] YYYY");
+  };
+
+  for (let i = daysFromNow - 7; i < daysFromNow; i++) {
+    days.push(getDay(i));
+  }
 
   for (let i = 0; i < 7; i++) {
     let dailyCaloryReajusted = dailyCalories;
