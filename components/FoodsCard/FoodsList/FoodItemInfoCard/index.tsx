@@ -4,7 +4,7 @@ import type { Meal } from "@/types/Meal";
 import { useUpdateFoodSelectById } from "@/hooks/use-update-food-select-by-id";
 import { useFoodsState } from "@/hooks/use-foods-state";
 import { Card } from "@/components/ui/card";
-import { NutrientsList } from "../../NutrientsList";
+import { NutrientsList } from "../NutrientsList";
 
 interface FoodItemInfoCardProps {
   food?: FoodItem;
@@ -29,6 +29,7 @@ export function FoodItemInfoCard({ food, meal }: FoodItemInfoCardProps) {
           food && foodsState === "selecting-meal" && food.selected === true,
         "bg-lime-500/70 text-white cursor-pointer":
           food?.createdByUser === true && foodsState !== "selecting-meal",
+        "cursor-pointer": meal,
       })}
     >
       {food && (

@@ -3,7 +3,6 @@
 import { Dialog } from "@/components/Dialog";
 import { InputForm } from "@/components/InputForm";
 import { Button } from "@/components/ui/button";
-import { DialogHeader } from "@/components/ui/dialog";
 import { useAddFood } from "@/hooks/use-add-food";
 import { submitNutrientsAsString } from "@/utils/submitNutrientsAsString";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,8 +67,14 @@ export function CreateFoodDialog({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Dialog onOpen={clearForm} maxWidth="w-96" asChild trigger={children}>
-      <DialogHeader>Adicionar alimento:</DialogHeader>
+    <Dialog
+      title="Adicionar alimento:"
+      description="Insira algumas informações nutricionais do alimento para prosseguir"
+      onOpen={clearForm}
+      maxWidth="w-96"
+      asChild
+      trigger={children}
+    >
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <div className="max-h-96 p-1 flex flex-col gap-4 overflow-y-scroll scrollbar-none">
           <InputForm

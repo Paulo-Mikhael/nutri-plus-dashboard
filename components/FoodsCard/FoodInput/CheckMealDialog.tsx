@@ -3,7 +3,7 @@
 import { Dialog } from "@/components/Dialog";
 import { useSelectedFoods } from "@/hooks/use-selected-foods";
 import { useRef, type ReactNode } from "react";
-import { NutrientsList } from "../../NutrientsList";
+import { NutrientsList } from "../FoodsList/NutrientsList";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { z } from "zod";
@@ -57,14 +57,14 @@ export function CheckMealDialog({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Dialog trigger={children}>
+    <Dialog title="Informações da refeição:" trigger={children}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
         <InputForm
           defaultValue={form.watch("mealName")}
           form={form}
           name="mealName"
           placeholder="Insira o nome da refeição a ser criada"
-          label="Nome da refeição"
+          label="Nome:"
           formMessage
         />
         <h4>Alimentos selecionados:</h4>
@@ -84,7 +84,7 @@ export function CheckMealDialog({ children }: { children: ReactNode }) {
         )}
         {selectedFoods.length > 0 && (
           <>
-            <h5 className="mt-4">Nutrientes da refeição:</h5>
+            <h5 className="mt-4">Nutrientes:</h5>
             <NutrientsList {...selectedFoodsState.nutrients} />
           </>
         )}

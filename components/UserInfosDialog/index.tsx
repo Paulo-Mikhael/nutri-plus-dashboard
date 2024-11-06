@@ -1,13 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
@@ -84,14 +78,13 @@ export function UserInfosDialog({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Dialog asChild trigger={children}>
+    <Dialog
+      title="Informações Pessoais"
+      description="Insira alguns dados sobre você para obter mais informações em seu dashboard."
+      asChild
+      trigger={children}
+    >
       <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <DialogHeader>
-          <DialogTitle>Informações Pessoais</DialogTitle>
-          <DialogDescription>
-            Insira alguns dados sobre você para obter mais informações em seu dashboard.
-          </DialogDescription>
-        </DialogHeader>
         <DialogInfosForm form={form} />
         <DialogFooter className="sm:justify-start">
           <Button type="submit" variant={!form.formState.isValid ? "destructive" : "default"}>

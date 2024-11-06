@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FoodsList } from "./FoodsList";
-import { FoodInput } from "./FoodsList/FoodInput";
+import { FoodInput } from "./FoodInput";
 import { useFilteredFoodsByName } from "@/hooks/use-filtered-foods";
 
 const formSchema = z.object({
