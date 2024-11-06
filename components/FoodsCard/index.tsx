@@ -23,10 +23,7 @@ export function FoodsCard() {
   const filteredFoods = useFilteredFoodsByName(foodName ? foodName : "");
 
   return (
-    <form
-      onSubmit={form.handleSubmit((data) => console.log(data.foodName))}
-      className="w-full flex flex-col gap-4"
-    >
+    <div className="w-full flex flex-col gap-4">
       <FoodInput form={form} />
       <FoodsList nullListMessage="Sem alimentos com esse nome" foods={filteredFoods} />
       {filteredFoods.length > 0 && (
@@ -41,6 +38,6 @@ export function FoodsCard() {
           </a>
         </h3>
       )}
-    </form>
+    </div>
   );
 }

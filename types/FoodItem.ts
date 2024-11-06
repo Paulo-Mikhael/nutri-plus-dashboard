@@ -4,5 +4,6 @@ export type FoodItem = {
   id: string; // uuid()
   name: string; // string
   nutrients: Nutrients;
-  selected: boolean;
+  selected?: boolean;
+  createdByUser?: boolean;
 };

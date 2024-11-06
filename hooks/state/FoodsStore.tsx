@@ -19,6 +19,7 @@ type FoodsActions = {
   updateSelectedByFoodId: (id: string) => void;
   clearSelection: () => void;
   addMeal: (meal: Meal) => void;
+  addFood: (food: FoodItem) => void;
 };
 
 export const useFoodsStore = create<FoodState & FoodsActions>((set, get) => ({
@@ -31,6 +32,11 @@ export const useFoodsStore = create<FoodState & FoodsActions>((set, get) => ({
   addMeal: (meal) => {
     set(() => ({
       meals: [...get().meals, meal],
+    }));
+  },
+  addFood: (food) => {
+    set(() => ({
+      items: [...get().items, food],
     }));
   },
   updateSelectedByFoodId: (id) => {

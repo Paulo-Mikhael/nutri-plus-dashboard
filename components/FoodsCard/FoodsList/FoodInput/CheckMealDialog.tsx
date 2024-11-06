@@ -36,7 +36,7 @@ export function CheckMealDialog({ children }: { children: ReactNode }) {
   function onSubmit(data: MealSchema) {
     const mealName = data.mealName;
 
-    if (!mealName || mealName.trim() === "") return;
+    if (!mealName || mealName.trim() === "" || selectedFoods.length <= 0) return;
     const foodsId: string[] = [];
 
     for (let i = 0; i < selectedFoods.length; i++) {
@@ -60,10 +60,12 @@ export function CheckMealDialog({ children }: { children: ReactNode }) {
     <Dialog trigger={children}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
         <InputForm
+          defaultValue={form.watch("mealName")}
           form={form}
           name="mealName"
           placeholder="Insira o nome da refeição a ser criada"
           label="Nome da refeição"
+          formMessage
         />
         <h4>Alimentos selecionados:</h4>
         {selectedFoods.length === 0 ? (

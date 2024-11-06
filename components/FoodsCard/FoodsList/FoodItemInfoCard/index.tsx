@@ -27,6 +27,8 @@ export function FoodItemInfoCard({ food, meal }: FoodItemInfoCardProps) {
           food && foodsState === "selecting-meal",
         "bg-green-500 dark:bg-green-500/70":
           food && foodsState === "selecting-meal" && food.selected === true,
+        "bg-lime-500/70 text-white cursor-pointer":
+          food?.createdByUser === true && foodsState !== "selecting-meal",
       })}
     >
       {food && (

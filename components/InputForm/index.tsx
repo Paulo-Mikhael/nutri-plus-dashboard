@@ -9,14 +9,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
 import type { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
+import type { HTMLInputTypeAttribute } from "react";
 
 interface InputFormProps<T extends FieldValues> {
   form: UseFormReturn<T>;
-  name: keyof T;
+  name: Path<T> | keyof T;
   placeholder: string;
   label: string;
   formMessage?: boolean;
   defaultValue?: string;
+  type?: HTMLInputTypeAttribute;
 }
 
 export function InputForm<T extends FieldValues>({
@@ -26,6 +28,7 @@ export function InputForm<T extends FieldValues>({
   label,
   formMessage,
   defaultValue,
+  type = "text",
 }: InputFormProps<T>) {
   useEffect(() => {
     form.setValue(name as Path<T>, defaultValue as PathValue<T, Path<T>>);
@@ -40,7 +43,7 @@ export function InputForm<T extends FieldValues>({
           <FormItem>
             <FormLabel>{label}</FormLabel>
             <FormControl>
-              <Input placeholder={placeholder} {...field} />
+              <Input type={type} placeholder={placeholder} {...field} />
             </FormControl>
             {formMessage && <FormMessage />}
           </FormItem>
