@@ -11,7 +11,7 @@ export function getChartByWeeklyCalories(weeklyCalories: number): CaloriesChartI
   const days: string[] = [];
   const daysFromNow = 7;
   const getDay = (daysToJump = 0) => {
-    return dayjs().add(daysToJump, "day").format("DD [de] MMMM [de] YYYY");
+    return dayjs().add(daysToJump, "day").format("DD [de] MMMM");
   };
 
   for (let i = daysFromNow - 7; i < daysFromNow; i++) {

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import type { FoodToUpdateChart } from "@/types/FoodToUpdateChart";
 import type { FoodItem } from "@/types/FoodItem";
 import type { FoodsState } from "@/types/FoodsState";
 import type { SelectedFoodsReturn } from "@/types/SelectedFoodsReturn";
@@ -9,8 +10,9 @@ import { useSelectedFoods as selectedFoods } from "../use-selected-foods";
 
 type FoodState = {
   items: FoodItem[];
-  state: FoodsState;
   meals: Meal[];
+  state: FoodsState;
+  foodsToUpdateChart: FoodToUpdateChart[];
 };
 type FoodsActions = {
   filteredFoodsByName: (searchedName: string) => FoodItem[];
@@ -20,15 +22,20 @@ type FoodsActions = {
   clearSelection: () => void;
   addMeal: (meal: Meal) => void;
   addFood: (food: FoodItem) => void;
+  setFoodsToUpdateChart: (foodsToUpdateChart: FoodToUpdateChart[]) => void;
 };
 
 export const useFoodsStore = create<FoodState & FoodsActions>((set, get) => ({
   items,
-  state: "none",
   meals: [],
+  state: "none",
+  foodsToUpdateChart: [],
   filteredFoodsByName,
   selectedFoods,
   setFoodsState: (state) => set(() => ({ state })),
+  setFoodsToUpdateChart: (foodsToUpdateChart) => {
+    set(() => ({ foodsToUpdateChart }));
+  },
   addMeal: (meal) => {
     set(() => ({
       meals: [...get().meals, meal],
@@ -51,6 +58,7 @@ export const useFoodsStore = create<FoodState & FoodsActions>((set, get) => ({
     set(() => ({
       state: "none",
       items: get().items.map((item) => ({ ...item, selected: false })),
+      foodsToUpdateChart: [],
     }));
   },
 }));

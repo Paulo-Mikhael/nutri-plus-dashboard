@@ -68,7 +68,7 @@ export function CreateFoodDialog({ children }: { children: ReactNode }) {
 
   return (
     <Dialog
-      title="Adicionar alimento:"
+      title="Adicionar comida:"
       description="Insira algumas informações nutricionais do alimento para prosseguir"
       onOpen={clearForm}
       maxWidth="w-96"
