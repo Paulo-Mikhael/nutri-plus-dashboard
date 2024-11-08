@@ -22,7 +22,7 @@ export function FoodItemInfoCard({ food, meal }: FoodItemInfoCardProps) {
   const [handleHover, setHandleHover] = useState<boolean>(false);
   const foodsToUpdateChart = useFoodsToUpdateChart();
   const addFoodToUpdateCard = useAddFoodToUpdateChart();
-  const foodToUpdateChart = foodsToUpdateChart.filter((item) => item.foodId === food?.id);
+  const foodToUpdateChart = foodsToUpdateChart.foods.filter((item) => item.foodId === food?.id);
   const foodToUpdateChartQuantity =
     foodToUpdateChart.length > 0 ? foodToUpdateChart[0].quantity : 0;
 
