@@ -9,15 +9,11 @@ import {
   ChartTooltipContent,
 } from "../../ui/chart";
 import { caloriesChartConfig } from "@/data/calories-chart-data";
-import { useGetUserCalories } from "@/hooks/use-get-user-calories";
-import { getChartByWeeklyCalories } from "@/utils/getChartByWeeklyCalories";
+import { useWeeklyCaloriesChart } from "@/hooks/use-weekly-calories-chart";
 
 export function CaloriesChart() {
-  const userCalories = useGetUserCalories();
-
-  if (!userCalories) return;
-
-  const userWeelkyCaloriesChart = getChartByWeeklyCalories(userCalories.weeklyCalories);
+  const userWeelkyCaloriesChart = useWeeklyCaloriesChart();
+  if (!userWeelkyCaloriesChart) return;
 
   return (
     <ChartContainer config={caloriesChartConfig} className="max-w-[100%] max-h-96">

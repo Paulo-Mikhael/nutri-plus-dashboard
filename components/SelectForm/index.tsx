@@ -11,7 +11,7 @@ import {
 } from "../ui/select";
 import type { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
 import type { SelectItems } from "@/types/SelectItems";
-import { FormField, FormItem, Form, FormLabel } from "../ui/form";
+import { FormField, FormItem, Form, FormLabel, FormMessage } from "../ui/form";
 import { useEffect, useRef } from "react";
 
 interface SelectInputProps<T extends FieldValues> {
@@ -22,6 +22,7 @@ interface SelectInputProps<T extends FieldValues> {
   submitOnChange?: boolean;
   label?: string;
   defaultValue?: string;
+  formMessage?: boolean;
 }
 
 export function SelectForm<T extends FieldValues>({
@@ -32,6 +33,7 @@ export function SelectForm<T extends FieldValues>({
   submitOnChange,
   label,
   defaultValue,
+  formMessage,
 }: SelectInputProps<T>) {
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -70,6 +72,7 @@ export function SelectForm<T extends FieldValues>({
                 ))}
               </SelectContent>
             </Select>
+            {formMessage && <FormMessage />}
           </FormItem>
         )}
       />

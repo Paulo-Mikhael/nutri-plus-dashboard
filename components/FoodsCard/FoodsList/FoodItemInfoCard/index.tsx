@@ -52,9 +52,9 @@ export function FoodItemInfoCard({ food, meal }: FoodItemInfoCardProps) {
             food && foodsState === "selecting-meal" && food.selected === true,
           "bg-lime-500/70 text-white cursor-pointer":
             food?.createdByUser === true && foodsState !== "selecting-meal",
-          "cursor-pointer": meal,
           "hover:bg-slate-200/70 hover:text-white dark:hover:bg-slate-900/70 dark:hover:text-slate-500 cursor-default":
             foodsState === "selecting-food",
+          "cursor-pointer": meal,
         }
       )}
     >
@@ -87,7 +87,7 @@ export function FoodItemInfoCard({ food, meal }: FoodItemInfoCardProps) {
       {foodsState === "selecting-food" &&
         foodToUpdateChart.length > 0 &&
         foodToUpdateChartQuantity !== 0 && (
-          <span className="bg-red-500 rounded-full px-4 py-2 absolute -top-1 -right-3">
+          <span className="bg-green-700 rounded-lg px-4 py-2 absolute top-2 right-2">
             <p className="text-bold text-white">{foodToUpdateChartQuantity}</p>
           </span>
         )}

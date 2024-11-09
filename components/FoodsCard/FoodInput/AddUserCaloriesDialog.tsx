@@ -14,7 +14,7 @@ const message = "Esse campo é obrigatório.";
 const formSchema = z.object({
   day: z.string({ message }).min(1, { message }),
   totalCalories: z.string({ message }).min(1, { message }),
-  action: z.enum(["decrease", "increase"]),
+  action: z.enum(["decrease", "increase"], { message }).nullable(),
 });
 type UserCaloriesSchema = z.infer<typeof formSchema>;
 
@@ -77,6 +77,7 @@ export function AddUserCaloriesDialog({ children }: AddUserCaloriesDialogProps) 
 
   return (
     <Dialog
+      onOpen={() => form.reset()}
       title="Adicionar calorias"
       description="Selecione um dia e diminua ou aumente suas calorias ingeridas neste dia."
       trigger={children}
@@ -88,7 +89,7 @@ export function AddUserCaloriesDialog({ children }: AddUserCaloriesDialogProps) 
           label="Dia da semana:"
           placeholder="Escolha uma data"
           items={daysOfWeekItems()}
-          defaultValue=""
+          formMessage
         />
         <SelectForm
           form={form}
@@ -96,7 +97,7 @@ export function AddUserCaloriesDialog({ children }: AddUserCaloriesDialogProps) 
           label="Ação:"
           placeholder="Deseja diminuir ou aumentar as calorias?"
           items={actionItems}
-          defaultValue=""
+          formMessage
         />
         <div className="flex gap-4 items-end justify-between">
           <div className="flex-grow">

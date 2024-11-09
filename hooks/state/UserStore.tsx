@@ -2,10 +2,15 @@ import type { UserLevel } from "@/types/UserLevel";
 import type { UserObjectives } from "@/types/UserObjectives";
 import type { GetWeeklyCaloriesReturn } from "@/types/GetSemanalCaloriesReturn";
 import type { GetImcReturn } from "@/types/GetImcReturn";
+import type { UserWeelkyCalories } from "@/types/UserWeeklyCalories";
 import { create } from "zustand";
 import { increaseWaterRecommendationByLevel } from "./functions/increaseWaterRecommendationByLevel";
 import { takeImcStatus } from "@/utils/takeImcStatus";
 import { getUserWeeklyCalories } from "@/utils/getUserSemanalCalories";
+import dayjs from "dayjs";
+import ptBr from "dayjs/locale/pt-br";
+
+dayjs.locale(ptBr);
 
 type UserState = {
   height: string;
@@ -14,6 +19,7 @@ type UserState = {
   age: number | null;
   gender: "man" | "woman" | null;
   objective: UserObjectives;
+  weeklyCalories: UserWeelkyCalories;
 };
 type UserActions = {
   setHeight: (height: string) => void;
@@ -35,6 +41,7 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
   age: null,
   gender: null,
   objective: null,
+  weeklyCalories: [{ date: dayjs().format("DD [de] MMMM"), calories: 1200 }],
   setHeight: (height) => set(() => ({ height })),
   setWeight: (weight) => set(() => ({ weight })),
   setUserLevel: (level) => set(() => ({ level })),

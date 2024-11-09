@@ -24,7 +24,7 @@ export function FoodsList({
     <div
       className={clsx("w-full flex gap-4", {
         "overflow-x-scroll pb-1": nonNullList && !vertical,
-        "overflow-y-scroll pr-1": nonNullList && vertical,
+        "overflow-y-scroll pr-1 scrollbar-none": nonNullList && vertical,
         "overflow-none": nullList,
         "flex-col max-h-96": vertical,
       })}
