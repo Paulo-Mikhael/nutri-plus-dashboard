@@ -1,7 +1,7 @@
-import type { UserWeelkyCalories } from "@/types/UserWeeklyCalories";
+import type { UserWeeklyCalories } from "@/types/UserWeeklyCalories";
 import { useUserStore } from "./state/UserStore";
 
-export function useUserWeeklyCalories(): UserWeelkyCalories {
+export function useUserWeeklyCalories(): UserWeeklyCalories[] {
   const userWeelkyCalories = useUserStore((state) => state.weeklyCalories);
 
   return userWeelkyCalories;

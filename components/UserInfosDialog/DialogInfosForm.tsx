@@ -44,6 +44,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         name="gender"
         items={userGenderItems}
         placeholder="Selecione seu gênero:"
+        formMessage
       />
       <InputForm
         defaultValue={userHeight !== "" ? formatHeight(userHeight) : undefined}
@@ -68,6 +69,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         name="level"
         items={userLevelItems}
         placeholder="Selecione seu nível de atividade física:"
+        formMessage
       />
       <SelectForm
         defaultValue={userObjective ? String(userObjective) : undefined}
@@ -76,6 +78,7 @@ export function DialogInfosForm<T extends FieldValues>({ form }: DialogInfosForm
         name="objective"
         items={userObjectiveItems}
         placeholder="Selecione seu objetivo"
+        formMessage
       />
     </div>
   );

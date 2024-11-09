@@ -2,7 +2,7 @@ import type { UserLevel } from "@/types/UserLevel";
 import type { UserObjectives } from "@/types/UserObjectives";
 import type { GetWeeklyCaloriesReturn } from "@/types/GetSemanalCaloriesReturn";
 import type { GetImcReturn } from "@/types/GetImcReturn";
-import type { UserWeelkyCalories } from "@/types/UserWeeklyCalories";
+import type { UserWeeklyCalories } from "@/types/UserWeeklyCalories";
 import { create } from "zustand";
 import { increaseWaterRecommendationByLevel } from "./functions/increaseWaterRecommendationByLevel";
 import { takeImcStatus } from "@/utils/takeImcStatus";
@@ -19,7 +19,7 @@ type UserState = {
   age: number | null;
   gender: "man" | "woman" | null;
   objective: UserObjectives;
-  weeklyCalories: UserWeelkyCalories;
+  weeklyCalories: UserWeeklyCalories[];
 };
 type UserActions = {
   setHeight: (height: string) => void;
@@ -28,6 +28,7 @@ type UserActions = {
   setUserAge: (age: number) => void;
   setUserGender: (gender: "man" | "woman") => void;
   setUserObjective: (objective: UserObjectives) => void;
+  setUserWeeklyCalories: (weeklyCalories: UserWeeklyCalories[]) => void;
   getUserImc: () => GetImcReturn;
   getUserWaterRecommendation: () => number;
   getUserBMR: () => number | null;
@@ -41,13 +42,17 @@ export const useUserStore = create<UserState & UserActions>((set, get) => ({
   age: null,
   gender: null,
   objective: null,
-  weeklyCalories: [{ date: dayjs().format("DD [de] MMMM"), calories: 1200 }],
+  weeklyCalories: [],
   setHeight: (height) => set(() => ({ height })),
   setWeight: (weight) => set(() => ({ weight })),
   setUserLevel: (level) => set(() => ({ level })),
   setUserAge: (age) => set(() => ({ age })),
   setUserGender: (gender) => set(() => ({ gender })),
   setUserObjective: (objective) => set(() => ({ objective })),
+  setUserWeeklyCalories: (weeklyCalories) =>
+    set(() => ({
+      weeklyCalories,
+    })),
   getUserImc: () => {
     const userHeight = get().height;
     const userWeight = get().weight;

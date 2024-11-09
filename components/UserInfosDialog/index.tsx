@@ -20,11 +20,11 @@ import { Dialog } from "../Dialog";
 const requiredMessage = "Esse campo é obrigatório";
 const formSchema = z.object({
   age: z.string({ message: requiredMessage }).min(1, { message: requiredMessage }),
-  gender: z.enum(["man", "woman"]),
+  gender: z.enum(["man", "woman"], { message: requiredMessage }),
   height: z.string({ message: requiredMessage }).min(1, { message: requiredMessage }),
   weight: z.string({ message: requiredMessage }).min(1, { message: requiredMessage }),
-  level: z.enum(userLevelEnum),
-  objective: z.enum(userObjectivesEnum),
+  level: z.enum(userLevelEnum, { message: requiredMessage }),
+  objective: z.enum(userObjectivesEnum, { message: requiredMessage }),
 });
 type UserInfosSchema = z.infer<typeof formSchema>;
 

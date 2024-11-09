@@ -1,5 +1,5 @@
 import type { SelectItems } from "@/types/SelectItems";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { Dialog } from "@/components/Dialog";
 import { SelectForm } from "@/components/SelectForm";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { InputForm } from "@/components/InputForm";
+import { useAddUserWeeklyCalories } from "@/hooks/use-add-user-weekly-calories";
+import { DialogClose } from "@/components/ui/dialog";
 
 const message = "Esse campo é obrigatório.";
 const formSchema = z.object({
@@ -23,7 +25,9 @@ interface AddUserCaloriesDialogProps {
 }
 
 export function AddUserCaloriesDialog({ children }: AddUserCaloriesDialogProps) {
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const foodsToUpdateChart = useFoodsToUpdateChart();
+  const addUserWeeklyCalories = useAddUserWeeklyCalories();
   const foodsCalories = foodsToUpdateChart.totalCalories.toString();
   const form = useForm<UserCaloriesSchema>({
     resolver: zodResolver(formSchema),
@@ -73,6 +77,12 @@ export function AddUserCaloriesDialog({ children }: AddUserCaloriesDialogProps) 
       form.setError("totalCalories", { message: "Insira um valor numérico nesse campo" });
       return;
     }
+
+    if (data.action === null) return;
+
+    addUserWeeklyCalories({ date: data.day, calories: Number(totalCalories) }, data.action);
+
+    closeButtonRef.current?.click();
   }
 
   return (
@@ -126,6 +136,11 @@ export function AddUserCaloriesDialog({ children }: AddUserCaloriesDialogProps) 
           Atualizar gráfico
         </Button>
       </form>
+      <DialogClose>
+        <button ref={closeButtonRef} type="button" hidden>
+          Fechar
+        </button>
+      </DialogClose>
     </Dialog>
   );
 }

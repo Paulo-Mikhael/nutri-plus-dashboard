@@ -1,4 +1,4 @@
-export type UserWeelkyCalories = {
+export type UserWeeklyCalories = {
   date: string;
   calories: number;
-}[];
+};
